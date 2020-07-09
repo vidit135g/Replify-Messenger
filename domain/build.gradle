@@ -1,0 +1,69 @@
+/*
+ * Copyright (C) 2017 Moez Bhatti <innovate.bhatti@gmail.com>
+ *
+ * This file is part of replify.
+ *
+ * replify is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * replify is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with replify.  If not, see <http://www.gnu.org/licenses/>.
+ */
+apply plugin: 'com.android.library'
+apply plugin: 'realm-android' // Realm needs to be before Kotlin or the build will fail
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+    }
+}
+
+dependencies {
+
+    // dagger
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    compileOnly "javax.annotation:jsr250-api:1.0"
+
+    // realm
+    kapt "io.realm:realm-annotations:$realm_version"
+    kapt "io.realm:realm-annotations-processor:$realm_version"
+
+    // rxjava
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
+
+    // coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-reactive:$coroutines_version"
+
+    implementation "androidx.core:core-ktx:$androidx_core_version"
+    implementation "com.f2prateek.rx.preferences2:rx-preferences:$rx_preferences_version"
+    implementation "com.jakewharton.timber:timber:$timber_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation project(":common")
+}
+
+repositories {
+    mavenCentral()
+}
